@@ -1,0 +1,200 @@
+--- 
+commands: 
+  eventjoin:
+    description: "eventjoin"
+  addreward: 
+    description: "adds reward"
+  availableflags: 
+    description: avaibleflags
+  convertuuid: 
+    description: ll
+  discord: 
+    description: discord
+  eventmsg: 
+    description: event
+  fakevote: 
+    description: "fakes vote"
+  spawners:
+    description: "spawners"
+  flag: 
+    description: flag
+  flags: 
+    description: flags
+  forum: 
+    description: forum
+  gs: 
+    description: "gs hinzufuegen"
+  hc: 
+    description: ss
+  hcadd: 
+    description: sd
+  hcdel: 
+    description: dels
+  help: 
+    description: help
+  ja: 
+    description: ja
+  konto: 
+    description: konto
+  hreset:
+    description: fds
+  htop:
+    description: fds
+  h:
+    description: d
+  messenger: 
+    description: restart
+  jm:
+    description: d
+  nein: 
+    description: nein
+  regeln: 
+    description: regeln
+  removereward: 
+    description: "removes reward"
+  scureload: 
+    description: ~
+  serie: 
+    description: f
+  setstreak: 
+    description: h
+  team: 
+    description: team
+  animals: 
+    description: "tiere halt"
+  tiere:
+    description: "Tiere"
+  token: 
+    description: token
+  tutorial: 
+    description: tutorial
+  twitch: 
+    description: twitch
+  umfrage: 
+    description: umfrage
+  preset: 
+    description: v
+  vip: 
+    description: l
+  vote: 
+    description: vote
+  voted: 
+    description: voted
+  voteevent: 
+    description: voteevent
+  werbung: 
+    description: kaufen
+  youtube: 
+    description: youtube
+  server:
+    description: server
+main: de.secretcraft.main.Main
+name: SecretcraftUtilities
+permissions: 
+  scu.*: 
+    children: 
+      scu.addreward: true
+      scu.availableflags: true
+      scu.bank: true
+      scu.basics: true
+      scu.dev: true
+      scu.enteignen: true
+      scu.event: true
+      scu.eventplayer: true
+      scu.fakevote: true
+      scu.flag.add: true
+      scu.flag.allow: true
+      scu.flag.change: true
+      scu.flag.del: true
+      scu.flag.forbid: true
+      scu.flag.forbiddenflags: true
+      scu.flag.help: true
+      scu.flag.info: true
+      scu.flag.kaufen: true
+      scu.flag.preis: true
+      scu.flag.remove: true
+      scu.flags: true
+      scu.gsdef: true
+      scu.gsdel: true
+      scu.gsinfo: true
+      scu.serie: true
+      scu.setstreak: true
+      scu.ticket: true
+      scu.tiere: true
+      scu.tokenadmin: true
+      scu.touuid: true
+      scu.vanish: true
+      scu.vip: true
+      scu.voteevent: true
+      secretcraft.messenger.restart: true
+    default: op
+    description: "Erlaubt alle commands"
+  scu.addreward: 
+    description: addreward
+  scu.availableflags: 
+    description: "erlaubt nachschauen von avaibleflags"
+  scu.bank: 
+    description: none
+  scu.basics: 
+    description: basics
+  scu.dev: 
+    description: dev
+  scu.enteignen: 
+    description: enteignen
+  scu.event: 
+    description: ture
+  scu.eventplayer: 
+    description: df
+  scu.fakevote: 
+    description: fakevote
+  scu.flag.add: 
+    description: "erlaubt adden eines flags"
+  scu.flag.allow: 
+    description: "erlaubt das erlauben"
+  scu.flag.change: 
+    description: "erlaubt aendern von flagpreis"
+  scu.flag.del: 
+    description: "erlaubt aendern von flagpreis"
+  scu.flag.forbid: 
+    description: "erlaubt verbieten von flags"
+  scu.flag.forbiddenflags: 
+    description: "erlaubt einsehen von verbotenen flags"
+  scu.flag.help: 
+    description: "erlaubt hilfe aufzurufen"
+  scu.flag.info: 
+    description: "erlaubt einsehen von info"
+  scu.flag.kaufen: 
+    description: "erlaubt das kaufen eines flags"
+  scu.flag.preis: 
+    description: "erlaubt das nachschauen des preis"
+  scu.flag.remove: 
+    description: "erlaubt das removen eines flags"
+  scu.flags: 
+    description: "erlaubt nachschauen von flags"
+  scu.gsdef: 
+    description: gsdef
+  scu.gsdel: 
+    description: gsdel
+  scu.gsinfo: 
+    description: gsinfo
+  scu.serie: 
+    description: serie
+  scu.setstreak: 
+    description: setstreak
+  scu.ticket: 
+    description: t
+  scu.tiere: 
+    description: tiere
+  scu.tokenadmin: 
+    description: tokenadmin
+  scu.touuid: 
+    description: touuid
+  scu.vanish: 
+    description: s
+  scu.vip: 
+    description: vip
+  scu.voteevent: 
+    description: l
+  secretcraft.messenger.restart: 
+    description: e
+version: "1.6.10"
