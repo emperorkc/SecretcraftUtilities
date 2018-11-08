@@ -34,45 +34,40 @@ public class BankListener implements Listener {
 		if (BankData.isEingerichtet(sb)) {
 			if (!BankData.isDeaktiviert(sb)) {
 				if (!e.getTransactionType().equals(TransactionType.BUY)) {
-					
-				
+
 					if (BankData.getMoney(sb) < e.getPrice()) {
-						
-					
-					
-						
-												e.setCancelled(TransactionOutcome.OTHER);
-						if(sb.isOnline()) {
-							Player ps=(Player) sb;
-							ps.sendMessage(prefix+" §6Dein Konto ist leer!");
+
+						e.setCancelled(TransactionOutcome.OTHER);
+						if (sb.isOnline()) {
+							Player ps = (Player) sb;
+							ps.sendMessage(prefix + " §6Dein Konto ist leer!");
 						}
 						p.sendMessage(prefix + " §6Der Käufer hat nicht genügend Geld auf dem Konto!");
-					
-				}}
+
+					}
+				}
 			}
 		}
 	}
-	
+
 	/*
-@EventHandler
-public void onDeath(PlayerDeathEvent e) {
-	Player p = e.getEntity();
-	double balance = eco.getBalance(p);
-	double lost=BankConfig.getLoss()*balance;
-		eco.withdrawPlayer(p, lost);
-		p.sendMessage(prefix+" §cDu bist gestorben und hast §4"+lost+" §cSD verloren! §6Auf deinem Konto ist dein Geld sicher");
-}*/
+	 * @EventHandler public void onDeath(PlayerDeathEvent e) { Player p =
+	 * e.getEntity(); double balance = eco.getBalance(p); double
+	 * lost=BankConfig.getLoss()*balance; eco.withdrawPlayer(p, lost);
+	 * p.sendMessage(prefix+" §cDu bist gestorben und hast §4"
+	 * +lost+" §cSD verloren! §6Auf deinem Konto ist dein Geld sicher"); }
+	 */
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onTransaktionPre(TransactionEvent e) throws IOException {
 		OfflinePlayer sb = e.getOwner();
-	
+
 		if (BankData.isEingerichtet(sb)) {
 			if (!BankData.isDeaktiviert(sb)) {
 				if (e.getTransactionType().equals(TransactionType.BUY)) {
-					if(eco.getBalance(sb)>0 ) {
-					BankData.addMoney(sb, e.getPrice());
-					eco.withdrawPlayer(sb, e.getPrice());
+					if (eco.getBalance(sb) > 0) {
+						BankData.addMoney(sb, e.getPrice());
+						eco.withdrawPlayer(sb, e.getPrice());
 					} else {
 						eco.depositPlayer(sb, 1);
 					}
@@ -80,7 +75,8 @@ public void onDeath(PlayerDeathEvent e) {
 					if (BankData.getMoney(sb) >= e.getPrice()) {
 						BankData.subMoney(sb, e.getPrice());
 						eco.depositPlayer(sb, e.getPrice());
-					} }
+					}
+				}
 			}
 		}
 	}
@@ -88,15 +84,17 @@ public void onDeath(PlayerDeathEvent e) {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
-	if(p.hasPermission("scu.bank")) {	if (BankData.isEingerichtet(p)) {
-			if (!BankData.isDeaktiviert(p)) {
-				if (BankData.getMoney(p) == 0) {
-					p.sendMessage(prefix + " §6Deine Bank verfügt über kein Geld mehr!");
+		if (p.hasPermission("scu.bank")) {
+			if (BankData.isEingerichtet(p)) {
+				if (!BankData.isDeaktiviert(p)) {
+					if (BankData.getMoney(p) == 0) {
+						p.sendMessage(prefix + " §6Deine Bank verfügt über kein Geld mehr!");
+					}
 				}
+			} else {
+				p.sendMessage(prefix + " §6Du hast dir noch kein Bankkonto eingerichtet! /konto einrichten");
 			}
-		} else {
-			p.sendMessage(prefix + " §6Du hast dir noch kein Bankkonto eingerichtet! /konto einrichten");
 		}
-	}}
+	}
 
 }

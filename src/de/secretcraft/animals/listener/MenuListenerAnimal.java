@@ -113,161 +113,164 @@ public class MenuListenerAnimal implements Listener {
 			event.setCancelled(true);
 			Player p = (Player) event.getWhoClicked();
 			Row row = getRowFromSlot(event.getSlot());
-			if(event.getCurrentItem().getAmount()!=0) {
-			ItemStack item = event.getCurrentItem();
-			int day = 0;
-			ItemMeta meta = item.getItemMeta();
-			File ConfigFile = new File("plugins/Tiere", "lastclicked");
-			FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
-			String uuid = Config.getString("p." + p.getName());
+			if (event.getCurrentItem().getAmount() != 0) {
+				ItemStack item = event.getCurrentItem();
+				int day = 0;
+				ItemMeta meta = item.getItemMeta();
+				File ConfigFile = new File("plugins/Tiere", "lastclicked");
+				FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
+				String uuid = Config.getString("p." + p.getName());
 
-			Entity e = Bukkit.getEntity(UUID.fromString(uuid));
-			if (item.getType().equals(Material.EXPERIENCE_BOTTLE)) {
-				int amount = 0;
-				for (int i = 0; i < 36; i++) {
-					if(p.getInventory().getItem(i)!=null) {
-					if (p.getInventory().getItem(i).getType().equals(Material.EXPERIENCE_BOTTLE)) {
-						amount = amount + (p.getInventory().getItem(i).getAmount());
-						p.getInventory().getItem(i).setAmount(0);
-					}}
+				Entity e = Bukkit.getEntity(UUID.fromString(uuid));
+				if (item.getType().equals(Material.EXPERIENCE_BOTTLE)) {
+					int amount = 0;
+					for (int i = 0; i < 36; i++) {
+						if (p.getInventory().getItem(i) != null) {
+							if (p.getInventory().getItem(i).getType().equals(Material.EXPERIENCE_BOTTLE)) {
+								amount = amount + (p.getInventory().getItem(i).getAmount());
+								p.getInventory().getItem(i).setAmount(0);
+							}
+						}
+					}
+					if (amount > 0) {
+						while (amount > (MobLevelListener.getReq(e) - MobLevelListener.getXp(e))) {
+							amount = amount - (MobLevelListener.getReq(e) - MobLevelListener.getXp(e));
+
+							MobLevelListener.addLevel(e);
+
+						}
+						MobLevelListener.setXp(e, amount + MobLevelListener.getXp(e));
+						MobLevelListener.setBar(e);
+						MobLevelListener.openInv(p, e);
+					} else {
+						p.sendMessage(prefix + " §cDu hast keine Xp-Flaschen mehr!");
+					}
 				}
-if(amount>0) {
-				while (amount > (MobLevelListener.getReq(e)-MobLevelListener.getXp(e))) {
-					amount = amount - (MobLevelListener.getReq(e) - MobLevelListener.getXp(e));
+				if (item.getType().equals(Material.ENDER_EYE)) {
+					ItemStack s = MobLevelListener.getEgg(e);
 
-					
-					MobLevelListener.addLevel(e);
-					
-				}
-				MobLevelListener.setXp(e, amount+MobLevelListener.getXp(e));
-MobLevelListener.setBar(e);
-MobLevelListener.openInv(p, e);
-			} else {
-				p.sendMessage(prefix+" §cDu hast keine Xp-Flaschen mehr!");
-			}
-			}
-			if (item.getType().equals(Material.ENDER_EYE)) {
-				ItemStack s = MobLevelListener.getEgg(e);
+					ItemMeta sm = s.getItemMeta();
+					sm.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+					sm.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+					sm.setLore(Arrays.asList("§6Tier: " + e.getType().toString(),
+							"§2Level: §6" + MobLevelListener.getLevel(e)));
 
-				ItemMeta sm = s.getItemMeta();
-				sm.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
-				sm.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-				sm.setLore(Arrays.asList("§6Tier: " + e.getType().toString(),
-						"§2Level: §6" + MobLevelListener.getLevel(e)));
-
-				s.setItemMeta(sm);
-				int amount = 0;
-				for (int i = 0; i < 36; i++) {
-					if(p.getInventory().getItem(i)!=null) {
-					if (p.getInventory().getItem(i).getType().equals(Material.EMERALD)) {
-						amount = amount + p.getInventory().getItem(i).getAmount();
-					}}
-				}
-				int ss=(MobLevelListener.getLevel(e)* 2);
-				if (amount >=ss) {
-					if (!invFull(p)) {
-
-						
-						for (int i = 0; i < 36; i++) {
-							if(p.getInventory().getItem(i)!=null) {
+					s.setItemMeta(sm);
+					int amount = 0;
+					for (int i = 0; i < 36; i++) {
+						if (p.getInventory().getItem(i) != null) {
 							if (p.getInventory().getItem(i).getType().equals(Material.EMERALD)) {
-								if (ss > 0) {
-									if (ss > p.getInventory().getItem(i).getAmount()) {
-										ss -= p.getInventory().getItem(i).getAmount();
+								amount = amount + p.getInventory().getItem(i).getAmount();
+							}
+						}
+					}
+					int ss = (MobLevelListener.getLevel(e) * 2);
+					if (amount >= ss) {
+						if (!invFull(p)) {
 
-										p.getInventory().getItem(i).setAmount(0);
-									} else {
-										p.getInventory().getItem(i)
-												.setAmount(p.getInventory().getItem(i).getAmount() - ss);
-										ss = 0;
+							for (int i = 0; i < 36; i++) {
+								if (p.getInventory().getItem(i) != null) {
+									if (p.getInventory().getItem(i).getType().equals(Material.EMERALD)) {
+										if (ss > 0) {
+											if (ss > p.getInventory().getItem(i).getAmount()) {
+												ss -= p.getInventory().getItem(i).getAmount();
+
+												p.getInventory().getItem(i).setAmount(0);
+											} else {
+												p.getInventory().getItem(i)
+														.setAmount(p.getInventory().getItem(i).getAmount() - ss);
+												ss = 0;
+											}
+										}
 									}
 								}
 							}
-						}}
-						e.remove();
-						p.getInventory().addItem(s);
-						MobLevelListener.removeEntity(e);
-						p.sendMessage(prefix + " §6Tier erfolgreich eingefangen!");
-						MobLevelListener.close(p, e);
+							e.remove();
+							p.getInventory().addItem(s);
+							MobLevelListener.removeEntity(e);
+							p.sendMessage(prefix + " §6Tier erfolgreich eingefangen!");
+							MobLevelListener.close(p, e);
+						} else {
+							p.getItemInHand().setAmount(p.getItemInHand().getAmount() + 1);
+							p.sendMessage(prefix + " §cDir fehlt der Platz im Inventar um das Tier zu fangen!");
+						}
 					} else {
-						p.getItemInHand().setAmount(p.getItemInHand().getAmount() + 1);
-						p.sendMessage(prefix + " §cDir fehlt der Platz im Inventar um das Tier zu fangen!");
+						p.sendMessage(prefix + " §cDir fehlen §a" + ((MobLevelListener.getLevel(e) * 2) - amount)
+								+ " §cEmeralds!");
+
 					}
-				} else {
-					p.sendMessage(prefix + " §cDir fehlen §a" + ((MobLevelListener.getLevel(e) * 2) - amount)
-							+ " §cEmeralds!");
+				}
+				if (e instanceof Sheep) {
+					if (meta.getDisplayName().equals("§3Farbe ändern")) {
+						openInvC(e, p);
+					}
 
 				}
-			}
-			if(e instanceof Sheep) {
-			if (meta.getDisplayName().equals("§3Farbe ändern")) {
-				openInvC(e, p);
-			}
-			
-			}
-			if(item.getType().equals(Material.BARRIER)) {
-				MobLevelListener.close(p, e);
-			}
-			if(event.getInventory().getTitle().equals("§1F§2a§3r§4b§5e§6n§7-§8A§au§bs§cw§da§eh§fl")) {
-			if (e instanceof Sheep) {
-				Sheep s = (Sheep) e;
-
-				switch (item.getType()) {
-				case WHITE_WOOL:
-					s.setColor(DyeColor.WHITE);
-					break;
-				case BLACK_WOOL:
-					s.setColor(DyeColor.BLACK);
-					break;
-				case LIME_WOOL:
-					s.setColor(DyeColor.LIME);
-
-					break;
-				case MAGENTA_WOOL:
-					s.setColor(DyeColor.MAGENTA);
-
-					break;
-				case BROWN_WOOL:
-					s.setColor(DyeColor.BROWN);
-
-					break;
-				case YELLOW_WOOL:
-					s.setColor(DyeColor.YELLOW);
-					break;
-				case RED_WOOL:
-					s.setColor(DyeColor.RED);
-					break;
-				case PURPLE_WOOL:
-					s.setColor(DyeColor.PURPLE);
-					break;
-				case PINK_WOOL:
-					s.setColor(DyeColor.PINK);
-					break;
-				case GREEN_WOOL:
-					s.setColor(DyeColor.GREEN);
-					break;
-				case CYAN_WOOL:
-					s.setColor(DyeColor.CYAN);
-					break;
-				case LIGHT_BLUE_WOOL:
-					s.setColor(DyeColor.LIGHT_BLUE);
-					break;
-				case LIGHT_GRAY_WOOL:
-					s.setColor(DyeColor.LIGHT_GRAY);
-					break;
-				case GRAY_WOOL:
-					s.setColor(DyeColor.GRAY);
-					break;
-				case ORANGE_WOOL:
-					s.setColor(DyeColor.ORANGE);
-					break;
-				case BLUE_WOOL:
-					s.setColor(DyeColor.BLUE);
-					break;
+				if (item.getType().equals(Material.BARRIER)) {
+					MobLevelListener.close(p, e);
 				}
+				if (event.getInventory().getTitle().equals("§1F§2a§3r§4b§5e§6n§7-§8A§au§bs§cw§da§eh§fl")) {
+					if (e instanceof Sheep) {
+						Sheep s = (Sheep) e;
 
-			}}
-		}}
+						switch (item.getType()) {
+						case WHITE_WOOL:
+							s.setColor(DyeColor.WHITE);
+							break;
+						case BLACK_WOOL:
+							s.setColor(DyeColor.BLACK);
+							break;
+						case LIME_WOOL:
+							s.setColor(DyeColor.LIME);
+
+							break;
+						case MAGENTA_WOOL:
+							s.setColor(DyeColor.MAGENTA);
+
+							break;
+						case BROWN_WOOL:
+							s.setColor(DyeColor.BROWN);
+
+							break;
+						case YELLOW_WOOL:
+							s.setColor(DyeColor.YELLOW);
+							break;
+						case RED_WOOL:
+							s.setColor(DyeColor.RED);
+							break;
+						case PURPLE_WOOL:
+							s.setColor(DyeColor.PURPLE);
+							break;
+						case PINK_WOOL:
+							s.setColor(DyeColor.PINK);
+							break;
+						case GREEN_WOOL:
+							s.setColor(DyeColor.GREEN);
+							break;
+						case CYAN_WOOL:
+							s.setColor(DyeColor.CYAN);
+							break;
+						case LIGHT_BLUE_WOOL:
+							s.setColor(DyeColor.LIGHT_BLUE);
+							break;
+						case LIGHT_GRAY_WOOL:
+							s.setColor(DyeColor.LIGHT_GRAY);
+							break;
+						case GRAY_WOOL:
+							s.setColor(DyeColor.GRAY);
+							break;
+						case ORANGE_WOOL:
+							s.setColor(DyeColor.ORANGE);
+							break;
+						case BLUE_WOOL:
+							s.setColor(DyeColor.BLUE);
+							break;
+						}
+
+					}
+				}
+			}
+		}
 	}
 
 	public void openInvC(Entity e, Player p) {
