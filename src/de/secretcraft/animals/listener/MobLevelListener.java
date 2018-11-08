@@ -104,8 +104,7 @@ public class MobLevelListener implements Listener {
 
 							if (getXp(enen) == getReq(enen)) {
 								addLevel(enen);
-								
-								
+
 								Bukkit.getWorld(enen.getWorld().getName()).playSound(enen.getLocation(),
 										Sound.ENTITY_PLAYER_LEVELUP, 10, 10);
 							}
@@ -128,28 +127,30 @@ public class MobLevelListener implements Listener {
 
 	public static boolean isInType(Entity e) {
 		if (e.getType().equals(EntityType.COW) || e.getType().equals(EntityType.PIG)
-				|| e.getType().equals(EntityType.CHICKEN) 
-				|| e.getType().equals(EntityType.SHEEP)) {
+				|| e.getType().equals(EntityType.CHICKEN) || e.getType().equals(EntityType.SHEEP)) {
 			return true;
 		}
 		return false;
 	}
-@EventHandler
-public void onJoin(PlayerJoinEvent e) throws IOException {
-	File ConfigFile = new File("plugins/Tiere", "joined");
-	FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
-	if(Config.get("Joined."+e.getPlayer().getName())==null) {
-		Config.set("Joined."+e.getPlayer().getName(), 1);
-		e.getPlayer().sendMessage("");
-		e.getPlayer().sendMessage("");
 
-		e.getPlayer().sendMessage(prefix+" §6Das neue Tiere-Plugin wurde aufgespielt! Hole dir deinen ersten Tier-Fänger zum einfangen deines ersten Tieres am Spawn ab! Jedes weitere Auge kostet im Token-Shop 20 Token. Sobald du dein Tier auf deinem Grundstück gespawnt hast, kannst du mit dem Tier interagieren.");
-		e.getPlayer().sendMessage("");
-		e.getPlayer().sendMessage("");
-Config.save(ConfigFile);
+	@EventHandler
+	public void onJoin(PlayerJoinEvent e) throws IOException {
+		File ConfigFile = new File("plugins/Tiere", "joined");
+		FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
+		if (Config.get("Joined." + e.getPlayer().getName()) == null) {
+			Config.set("Joined." + e.getPlayer().getName(), 1);
+			e.getPlayer().sendMessage("");
+			e.getPlayer().sendMessage("");
 
+			e.getPlayer().sendMessage(prefix
+					+ " §6Das neue Tiere-Plugin wurde aufgespielt! Hole dir deinen ersten Tier-Fänger zum einfangen deines ersten Tieres am Spawn ab! Jedes weitere Auge kostet im Token-Shop 20 Token. Sobald du dein Tier auf deinem Grundstück gespawnt hast, kannst du mit dem Tier interagieren.");
+			e.getPlayer().sendMessage("");
+			e.getPlayer().sendMessage("");
+			Config.save(ConfigFile);
+
+		}
 	}
-}
+
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onHit(EntityDamageByEntityEvent e) throws IOException {
@@ -199,7 +200,7 @@ Config.save(ConfigFile);
 		return !Arrays.asList(p.getInventory().getStorageContents()).contains(null);
 	}
 
-	@EventHandler(priority=EventPriority.LOWEST)
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onBreedi(EntityBreedEvent e) throws IOException {
 		if (isInType(e.getEntity())) {
 			Entity mother = e.getMother();
@@ -209,170 +210,174 @@ Config.save(ConfigFile);
 			if (isMaxed(p)) {
 				e.setCancelled(true);
 			} else {
-				if(getBesitzer(mother).equals(p) &&getBesitzer(father).equals(p)  ) {
-				int level = 0;
-				if (isRegistered(mother) && isRegistered(father)) {
-					level = (int) (((getLevel(mother) + getLevel(father)) * 0.8) / 2);
-				}
-				Entity[] earray = father.getChunk().getEntities();
-				int count = 0;
-				for (Entity en : earray) {
-					if (isInType(en)) {
-						count++;
-					}
-				}
-				if (count >= max) {
-					Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-						@Override
-						public void run() {
-					switch (child.getType()) {
-					case COW:
-
-						Cow c1 = (Cow) father;
-						Cow c2 = (Cow) mother;
-
-						c1.setBreed(true);
-						c2.setBreed(true);
-
-						break;
-
-					case CHICKEN:
-						Chicken cc1 = (Chicken) father;
-						Chicken cc2 = (Chicken) mother;
-
-						cc1.setBreed(true);
-						cc2.setBreed(true);
-
-						break;
-					case PIG:
-
-						Pig pi1 = (Pig) father;
-						Pig pi2 = (Pig) mother;
-
-						pi1.setBreed(true);
-						pi2.setBreed(true);
-
-						break;
-					
-					case SHEEP:
-
-						Sheep s1 = (Sheep) mother;
-						Sheep s2 = (Sheep) father;
-
-						s1.setBreed(true);
-						s2.setBreed(true);
-
-						break;
-					}
-						}
-					}, 20);
-					p.sendMessage(prefix + " §cVermehren fehlgeschlagen, es sind zu viele Tiere im Chunk vorhanden!");
-					child.remove();
-				} else {
-
+				if (getBesitzer(mother).equals(p) && getBesitzer(father).equals(p)) {
+					int level = 0;
 					if (isRegistered(mother) && isRegistered(father)) {
-					setLevel(child, level);
-					setBar(child);
-					setBesitzer(child, p);
+						level = (int) (((getLevel(mother) + getLevel(father)) * 0.8) / 2);
 					}
-
-				}
-				if (((getLevel(mother) + getLevel(father)) / 2) > 25) {
-					int dur = 6000 - (((getLevel(mother) + getLevel(father)) / 2) * 50);
-					if (dur < 600) {
-						dur = 600;
+					Entity[] earray = father.getChunk().getEntities();
+					int count = 0;
+					for (Entity en : earray) {
+						if (isInType(en)) {
+							count++;
+						}
 					}
-					switch (child.getType()) {
-					case COW:
-						Cow c = (Cow) child;
-						Cow c1 = (Cow) father;
-						Cow c2 = (Cow) mother;
+					if (count >= max) {
 						Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
 							@Override
 							public void run() {
-								c.setBreed(true);
-							}
-						}, 20);
+								switch (child.getType()) {
+								case COW:
 
-						Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-							@Override
-							public void run() {
-								if (!(c1.canBreed() && c2.canBreed())) {
+									Cow c1 = (Cow) father;
+									Cow c2 = (Cow) mother;
+
 									c1.setBreed(true);
 									c2.setBreed(true);
-								}
-							}
-						}, dur);
-						break;
 
-					case CHICKEN:
-						Chicken cc = (Chicken) child;
-						Chicken cc1 = (Chicken) father;
-						Chicken cc2 = (Chicken) mother;
-						Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-							@Override
-							public void run() {
-								cc.setBreed(true);
-							}
-						}, 20);
+									break;
 
-						Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-							@Override
-							public void run() {
-								if (!(cc1.canBreed() && cc2.canBreed())) {
+								case CHICKEN:
+									Chicken cc1 = (Chicken) father;
+									Chicken cc2 = (Chicken) mother;
+
 									cc1.setBreed(true);
 									cc2.setBreed(true);
-								}
-							}
-						}, dur);
-						break;
-					case PIG:
-						Pig pi = (Pig) child;
-						Pig pi1 = (Pig) father;
-						Pig pi2 = (Pig) mother;
-						Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-							@Override
-							public void run() {
-								pi.setBreed(true);
-							}
-						}, 20);
 
-						Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-							@Override
-							public void run() {
-								if (!(pi1.canBreed() && pi2.canBreed())) {
+									break;
+								case PIG:
+
+									Pig pi1 = (Pig) father;
+									Pig pi2 = (Pig) mother;
+
 									pi1.setBreed(true);
 									pi2.setBreed(true);
-								}
-							}
-						}, dur);
-						break;
-				
-					case SHEEP:
-						Sheep s = (Sheep) child;
-						Sheep s1 = (Sheep) mother;
-						Sheep s2 = (Sheep) father;
 
-						Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-							@Override
-							public void run() {
-								s.setBreed(true);
-							}
-						}, 20);
+									break;
 
-						Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-							@Override
-							public void run() {
-								if (!(s1.canBreed() && s2.canBreed())) {
+								case SHEEP:
+
+									Sheep s1 = (Sheep) mother;
+									Sheep s2 = (Sheep) father;
+
 									s1.setBreed(true);
 									s2.setBreed(true);
+
+									break;
 								}
 							}
-						}, dur);
-						break;
+						}, 20);
+						p.sendMessage(
+								prefix + " §cVermehren fehlgeschlagen, es sind zu viele Tiere im Chunk vorhanden!");
+						child.remove();
+					} else {
+
+						if (isRegistered(mother) && isRegistered(father)) {
+							setLevel(child, level);
+							setBar(child);
+							setBesitzer(child, p);
+						}
+
 					}
+					if (((getLevel(mother) + getLevel(father)) / 2) > 25) {
+						int dur = 6000 - (((getLevel(mother) + getLevel(father)) / 2) * 50);
+						if (dur < 600) {
+							dur = 600;
+						}
+						switch (child.getType()) {
+						case COW:
+							Cow c = (Cow) child;
+							Cow c1 = (Cow) father;
+							Cow c2 = (Cow) mother;
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+								@Override
+								public void run() {
+									c.setBreed(true);
+								}
+							}, 20);
+
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+								@Override
+								public void run() {
+									if (!(c1.canBreed() && c2.canBreed())) {
+										c1.setBreed(true);
+										c2.setBreed(true);
+									}
+								}
+							}, dur);
+							break;
+
+						case CHICKEN:
+							Chicken cc = (Chicken) child;
+							Chicken cc1 = (Chicken) father;
+							Chicken cc2 = (Chicken) mother;
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+								@Override
+								public void run() {
+									cc.setBreed(true);
+								}
+							}, 20);
+
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+								@Override
+								public void run() {
+									if (!(cc1.canBreed() && cc2.canBreed())) {
+										cc1.setBreed(true);
+										cc2.setBreed(true);
+									}
+								}
+							}, dur);
+							break;
+						case PIG:
+							Pig pi = (Pig) child;
+							Pig pi1 = (Pig) father;
+							Pig pi2 = (Pig) mother;
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+								@Override
+								public void run() {
+									pi.setBreed(true);
+								}
+							}, 20);
+
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+								@Override
+								public void run() {
+									if (!(pi1.canBreed() && pi2.canBreed())) {
+										pi1.setBreed(true);
+										pi2.setBreed(true);
+									}
+								}
+							}, dur);
+							break;
+
+						case SHEEP:
+							Sheep s = (Sheep) child;
+							Sheep s1 = (Sheep) mother;
+							Sheep s2 = (Sheep) father;
+
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+								@Override
+								public void run() {
+									s.setBreed(true);
+								}
+							}, 20);
+
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+								@Override
+								public void run() {
+									if (!(s1.canBreed() && s2.canBreed())) {
+										s1.setBreed(true);
+										s2.setBreed(true);
+									}
+								}
+							}, dur);
+							break;
+						}
+					}
+				} else {
+					p.sendMessage(prefix + " §3Dir müssen beide Tiere gehören.");
 				}
-			}else {p.sendMessage(prefix+" §3Dir müssen beide Tiere gehören.");}}
+			}
 
 		}
 	}
@@ -403,22 +408,23 @@ Config.save(ConfigFile);
 	}
 
 	@SuppressWarnings("deprecation")
-	@EventHandler(priority=EventPriority.LOWEST)
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onClick(PlayerInteractEntityEvent e) throws IOException {
 		Player p = e.getPlayer();
 
 		if (p.getItemInHand().getAmount() == 0) {
 			if (isRegistered(e.getRightClicked())) {
-				if(getBesitzer(e.getRightClicked()).equals(e.getPlayer()) ||p.hasPermission("scu.*")) {
-				File ConfigFile = new File("plugins/Tiere", "lastclicked");
-				FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
-				openInv(p, e.getRightClicked());
-				Config.set("p." + p.getName(), e.getRightClicked().getUniqueId().toString());
-				Config.save(ConfigFile);
-			}else {
-				e.getPlayer().sendMessage(prefix+" §cDies ist das Tier von §e"+getBesitzer(e.getRightClicked()).getName()+"§c!");
-			}
+				if (getBesitzer(e.getRightClicked()).equals(e.getPlayer()) || p.hasPermission("scu.*")) {
+					File ConfigFile = new File("plugins/Tiere", "lastclicked");
+					FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
+					openInv(p, e.getRightClicked());
+					Config.set("p." + p.getName(), e.getRightClicked().getUniqueId().toString());
+					Config.save(ConfigFile);
+				} else {
+					e.getPlayer().sendMessage(prefix + " §cDies ist das Tier von §e"
+							+ getBesitzer(e.getRightClicked()).getName() + "§c!");
 				}
+			}
 
 		}
 	}
@@ -492,7 +498,7 @@ Config.save(ConfigFile);
 
 				m1.open(p);
 				break;
-			
+
 			case CHICKEN:
 				MenuListenerAnimal m3 = new MenuListenerAnimal(
 						"§bHuhn - §2Level: §c" + getLevel(e) + " §6§l- §2Xp: " + getXp(e) + "§6/§2" + getReq(e), 3);
@@ -534,11 +540,12 @@ Config.save(ConfigFile);
 				i++;
 			}
 		}
-		if(isInType(e.getEntity())) {
-		if (i >= max) {
-			e.setCancelled(true);
+		if (isInType(e.getEntity())) {
+			if (i >= max) {
+				e.setCancelled(true);
 
-		}}
+			}
+		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
@@ -567,7 +574,7 @@ Config.save(ConfigFile);
 				e.getEntity().remove();
 				removeEntity(e.getEntity());
 			}
-			
+
 		}
 	}
 
@@ -658,8 +665,8 @@ Config.save(ConfigFile);
 	public static int getReq(Entity e) {
 		File ConfigFile = new File("plugins/Tiere", e.getUniqueId().toString());
 		FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
-		int req= Config.getInt("Level") * 15;
-		
+		int req = Config.getInt("Level") * 15;
+
 		return req;
 	}
 
@@ -672,22 +679,23 @@ Config.save(ConfigFile);
 	public static void addLevel(Entity e) throws IOException {
 		File ConfigFile = new File("plugins/Tiere", e.getUniqueId().toString());
 		FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
-		int level=Config.getInt("Level");
-		Config.set("Level", level+1);
+		int level = Config.getInt("Level");
+		Config.set("Level", level + 1);
 		Config.save(ConfigFile);
-		
-			Config.set("Req", getReq(e));
-		
+
+		Config.set("Req", getReq(e));
+
 		Config.set("Xp", 0);
 		Config.save(ConfigFile);
 	}
+
 	public static void setLevel(Entity e, int i) throws IOException {
 		File ConfigFile = new File("plugins/Tiere", e.getUniqueId().toString());
 		FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
 		Config.set("Level", i);
-		
-			Config.set("Req", i*15);
-		
+
+		Config.set("Req", i * 15);
+
 		Config.save(ConfigFile);
 	}
 
@@ -752,86 +760,90 @@ Config.save(ConfigFile);
 			}
 		}
 	}
+
 	@EventHandler
 	public void onThrowa(PlayerInteractEntityEvent e) {
-		
-			if (e.getPlayer().getItemInHand().getType().equals(Material.ENDER_EYE)) {
-				if (e.getPlayer().getItemInHand().hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
-					e.setCancelled(true);
-					e.getPlayer().sendMessage(prefix + " §cDu kannst dieses Item nicht schmeißen!");
-				}
-			
+
+		if (e.getPlayer().getItemInHand().getType().equals(Material.ENDER_EYE)) {
+			if (e.getPlayer().getItemInHand().hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
+				e.setCancelled(true);
+				e.getPlayer().sendMessage(prefix + " §cDu kannst dieses Item nicht schmeißen!");
+			}
+
 		}
 	}
 
 	@EventHandler
 	public void chunk(ChunkLoadEvent e) throws IOException {
 
-		if(e.getWorld().getName().toLowerCase().equals("stadtwelt")||e.getWorld().getName().toLowerCase().equals("plotstart")||e.getWorld().getName().toLowerCase().equals("spawn")) {
-		Entity[] ea = e.getChunk().getEntities();
-		int count = 0;
-		for (Entity ef : ea) {
-			if (isInType(ef)) {
-				count++;
-			}
-		}
-		ArrayList<Entity> l = new ArrayList<Entity>();
-		if (count > max) {
+		if (e.getWorld().getName().toLowerCase().equals("stadtwelt")
+				|| e.getWorld().getName().toLowerCase().equals("plotstart")
+				|| e.getWorld().getName().toLowerCase().equals("spawn")) {
+			Entity[] ea = e.getChunk().getEntities();
+			int count = 0;
 			for (Entity ef : ea) {
 				if (isInType(ef)) {
-					l.add(ef);
+					count++;
 				}
-
 			}
-		}
-		if (!l.isEmpty()) {
-			int count1 = 0;
-			while (l.size() > max) {
-				Entity min = null;
-				int mini = 1000;
-				for (int i = 0; i < l.size(); i++) {
-					Entity eh = l.get(i);
+			ArrayList<Entity> l = new ArrayList<Entity>();
+			if (count > max) {
+				for (Entity ef : ea) {
+					if (isInType(ef)) {
+						l.add(ef);
+					}
 
-					if (isRegistered(eh)) {
+				}
+			}
+			if (!l.isEmpty()) {
+				int count1 = 0;
+				while (l.size() > max) {
+					Entity min = null;
+					int mini = 1000;
+					for (int i = 0; i < l.size(); i++) {
+						Entity eh = l.get(i);
 
-						if (canBuild(e.getWorld().getName(), getBesitzer(eh), eh.getLocation())) {
+						if (isRegistered(eh)) {
 
-							if (getLevel(eh) < mini) {
-								mini = getLevel(eh);
-								min = eh;
+							if (canBuild(e.getWorld().getName(), getBesitzer(eh), eh.getLocation())) {
+
+								if (getLevel(eh) < mini) {
+									mini = getLevel(eh);
+									min = eh;
+								}
+
+							} else {
+								l.remove(eh);
+								removeEntity(eh);
+
+								eh.remove();
+								min = null;
 							}
-
 						} else {
-							l.remove(eh);
-							removeEntity(eh);
 
+							l.remove(eh);
+							if (e.getWorld().equals("stadtwelt"))
+								count1++;
 							eh.remove();
 							min = null;
-						}
-					} else {
 
-						l.remove(eh);
+						}
+					}
+					if (min != null) {
+						l.remove(min);
 						if (e.getWorld().equals("stadtwelt"))
 							count1++;
-						eh.remove();
-						min = null;
-
+						min.remove();
 					}
 				}
-				if (min != null) {
-					l.remove(min);
-					if (e.getWorld().equals("stadtwelt"))
-						count1++;
-					min.remove();
+				if (count > 10) {
+					File ConfigFile = new File("plugins/Tiere/cleared", "cleared");
+					FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
+					Config.set(e.getChunk().getX() + "." + e.getChunk().getZ(), "cleared");
+					Config.save(ConfigFile);
 				}
 			}
-			if (count > 10) {
-				File ConfigFile = new File("plugins/Tiere/cleared", "cleared");
-				FileConfiguration Config = YamlConfiguration.loadConfiguration(ConfigFile);
-				Config.set(e.getChunk().getX() + "." + e.getChunk().getZ(), "cleared");
-				Config.save(ConfigFile);
-			}
-		}}
+		}
 
 	}
 
@@ -852,24 +864,24 @@ Config.save(ConfigFile);
 							|| e.getPlayer().getItemInHand().getType().equals(Material.OCELOT_SPAWN_EGG)
 							|| e.getPlayer().getItemInHand().getType().equals(Material.PARROT_SPAWN_EGG)
 							|| e.getPlayer().getItemInHand().getType().equals(Material.TURTLE_SPAWN_EGG)) {
-					if(!e.getPlayer().getItemInHand().hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
-					
+						if (!e.getPlayer().getItemInHand().hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
 
-						Entity[] earray = e.getClickedBlock().getChunk().getEntities();
-						int count = 0;
-						for (Entity en : earray) {
-							if (isInType(en)) {
-								count++;
+							Entity[] earray = e.getClickedBlock().getChunk().getEntities();
+							int count = 0;
+							for (Entity en : earray) {
+								if (isInType(en)) {
+									count++;
+								}
+
 							}
-
-						}
-						if (count >= max) {
-							e.setCancelled(true);
-							e.getPlayer().sendMessage(
-									prefix + " §cChunk-Limit von " + max + " Tiere darf nicht überschritten werden!");
+							if (count >= max) {
+								e.setCancelled(true);
+								e.getPlayer().sendMessage(prefix + " §cChunk-Limit von " + max
+										+ " Tiere darf nicht überschritten werden!");
+							}
 						}
 					}
-				}}
+				}
 			}
 		}
 	}
@@ -906,7 +918,7 @@ Config.save(ConfigFile);
 										}
 										int z = Integer.parseInt(b);
 										setLevel(ent, z);
-										
+
 										setBesitzer(ent, e.getPlayer());
 										setBar(ent);
 										e.getPlayer().getItemInHand()
@@ -953,7 +965,7 @@ Config.save(ConfigFile);
 			return EntityType.CHICKEN;
 		case SHEEP_SPAWN_EGG:
 			return EntityType.SHEEP;
-	
+
 		}
 		return null;
 	}
@@ -968,7 +980,6 @@ Config.save(ConfigFile);
 			return new ItemStack(Material.CHICKEN_SPAWN_EGG);
 		case SHEEP:
 			return new ItemStack(Material.SHEEP_SPAWN_EGG);
-		
 
 		}
 		return null;
@@ -1023,56 +1034,59 @@ Config.save(ConfigFile);
 			}
 		}
 	}
+
 	public static void createList() throws IOException {
-		ArrayList<String> l1=getPlayers();
-		ArrayList<String> l2=new ArrayList<>();
-		ArrayList<Entity> l4=new ArrayList<>();
-		for(int i=0; i<10; i++) {
-			Entity highest=null;
-			int highesti=0;
-			for(String ps: l1) {
-				OfflinePlayer p=Bukkit.getOfflinePlayer(UUID.fromString(ps));
-				ArrayList<String> l3=getEntities(p);
-				for(String es:l3) {
-					Entity e=Bukkit.getEntity(UUID.fromString(es));
-					if(!l4.contains(e)) {
-						if(e!=null) {
-					if(getLevel(e)>=highesti) {
-						highest=e;
-						highesti=getLevel(e);
-					}}
+		ArrayList<String> l1 = getPlayers();
+		ArrayList<String> l2 = new ArrayList<>();
+		ArrayList<Entity> l4 = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			Entity highest = null;
+			int highesti = 0;
+			for (String ps : l1) {
+				OfflinePlayer p = Bukkit.getOfflinePlayer(UUID.fromString(ps));
+				ArrayList<String> l3 = getEntities(p);
+				for (String es : l3) {
+					Entity e = Bukkit.getEntity(UUID.fromString(es));
+					if (!l4.contains(e)) {
+						if (e != null) {
+							if (getLevel(e) >= highesti) {
+								highest = e;
+								highesti = getLevel(e);
+							}
+						}
 					}
 				}
-				
+
 			}
 			l4.add(highest);
 		}
-		for(int i=1; i<11; i++) {
-		File ConfigFile2 = new File("plugins/Tiere/Liste", "Topliste");
-		FileConfiguration Config2 = YamlConfiguration.loadConfiguration(ConfigFile2);
-		Entity e=l4.get(i-1);
-		if(e!=null) {
-			String art="";
-			switch(e.getType()) {
-			case COW:
-				art="§7Kuh";
-				break;
-			case CHICKEN:
-				art="§eHuhn";
-				break;
-			
-			case SHEEP:
-				art="§fSchaaf";
-				break;
-			case PIG:
-				art="§dSchwein";
-				break;
+		for (int i = 1; i < 11; i++) {
+			File ConfigFile2 = new File("plugins/Tiere/Liste", "Topliste");
+			FileConfiguration Config2 = YamlConfiguration.loadConfiguration(ConfigFile2);
+			Entity e = l4.get(i - 1);
+			if (e != null) {
+				String art = "";
+				switch (e.getType()) {
+				case COW:
+					art = "§7Kuh";
+					break;
+				case CHICKEN:
+					art = "§eHuhn";
+					break;
+
+				case SHEEP:
+					art = "§fSchaaf";
+					break;
+				case PIG:
+					art = "§dSchwein";
+					break;
+				}
+				Config2.set("Liste." + i, "§2" + i + ". §aBesitzer: §6" + getBesitzer(e).getName() + "§2, §aArt: " + art
+						+ "§2, §aLevel: §6" + getLevel(e));
+
+				Config2.save(ConfigFile2);
 			}
-		Config2.set("Liste."+i,"§2"+i+". §aBesitzer: §6"+getBesitzer(e).getName()+"§2, §aArt: "+art+"§2, §aLevel: §6"+getLevel(e) );
-		
-		Config2.save(ConfigFile2);
-		}
 		}
 	}
-	
+
 }

@@ -200,7 +200,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new MenuListener(), this);
 		Bukkit.getPluginManager().registerEvents(new MenuListenerToken(), this);
 		Bukkit.getPluginManager().registerEvents(new LiftSignListener(), this);
-		
+
 		Bukkit.getPluginManager().registerEvents(new HostileMobSpawn(), this);
 
 		// Entwicklung:
