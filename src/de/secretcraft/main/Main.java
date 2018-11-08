@@ -34,7 +34,8 @@ import de.secretcraft.bank.commands.BankCommand;
 import de.secretcraft.bank.config.BankConfig;
 import de.secretcraft.bank.listener.BankListener;
 import de.secretcraft.basiclisteners.BasicListener;
-
+import de.secretcraft.customFlags.Listeners.HostileMobSpawn;
+import de.secretcraft.customFlags.flags.Flags;
 import de.secretcraft.eventplaner.Commands.ChestCommands;
 import de.secretcraft.eventplaner.Commands.EventJoinCommand;
 import de.secretcraft.eventplaner.Commands.JMCommand;
@@ -93,10 +94,13 @@ import net.milkbowl.vault.economy.Economy;
 
 public class Main extends JavaPlugin {
 	private static Main plugin;
+
 	public Main() {
-		plugin=this;
+		plugin = this;
 	}
-	public static int price=0;
+
+	public static int price = 0;
+
 	public void onEnable() {
 		try {
 			MobLevelListener.createList();
@@ -104,7 +108,7 @@ public class Main extends JavaPlugin {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		
+
 		votifierListener.Config.set("Uhr", null);
 		votifierListener.Config.set("Check", null);
 		try {
@@ -113,8 +117,8 @@ public class Main extends JavaPlugin {
 			// TODO Auto-generated catch block
 			e3.printStackTrace();
 		}
-		price=0;
-		if(UtilitiesConfig.getMax()==0) {
+		price = 0;
+		if (UtilitiesConfig.getMax() == 0) {
 			try {
 				UtilitiesConfig.setMax(5);
 			} catch (IOException e) {
@@ -122,9 +126,9 @@ public class Main extends JavaPlugin {
 				e.printStackTrace();
 			}
 		}
-		//Commands:
-	
-		//Event-"Temporär":
+		// Commands:
+
+		// Event-"Temporär":
 		getCommand("hc").setExecutor(new ChestCommands());
 		getCommand("hcadd").setExecutor(new ChestCommands());
 		getCommand("hcdel").setExecutor(new ChestCommands());
@@ -133,21 +137,21 @@ public class Main extends JavaPlugin {
 		getCommand("htop").setExecutor(new HTopCommand());
 		getCommand("jm").setExecutor(new JMCommand());
 		getCommand("preset").setExecutor(new VanishedCommand());
-		
-		//Event-"Nutzen":
+
+		// Event-"Nutzen":
 		getCommand("eventjoin").setExecutor(new EventJoinCommand());
 		getCommand("eventmsg").setExecutor(new EventCommand());
-		
-		//Playerwatch:
+
+		// Playerwatch:
 		getCommand("spawners").setExecutor(new SpawnersCommand());
 		getCommand("animals").setExecutor(new MobCountCommand());
-		
-		//FlagBuy:
+
+		// FlagBuy:
 		getCommand("flag").setExecutor(new FlagCommands());
 		getCommand("flags").setExecutor(new FlagsCommand());
 		getCommand("availableflags").setExecutor(new AvaibleFlagsCommand());
-		
-		//Voten:
+
+		// Voten:
 		getCommand("serie").setExecutor(new OpenInventoryCommand());
 		getCommand("token").setExecutor(new TokenCommands());
 		getCommand("voteevent").setExecutor(new VoteEventCommand());
@@ -155,8 +159,8 @@ public class Main extends JavaPlugin {
 		getCommand("setstreak").setExecutor(new setStreakCommand());
 		getCommand("removereward").setExecutor(new RemoveRewardCommand());
 		getCommand("addreward").setExecutor(new addRewardCommand());
-		
-		//Utilities:
+
+		// Utilities:
 		getCommand("gs").setExecutor(new GsDefCommand());
 		getCommand("tutorial").setExecutor(new TutorialCommand());
 		getCommand("team").setExecutor(new TeamCommand());
@@ -174,14 +178,12 @@ public class Main extends JavaPlugin {
 		getCommand("scureload").setExecutor(new ReparaturCommand());
 		getCommand("twitch").setExecutor(new TwitchCommand());
 		getCommand("tiere").setExecutor(new TiereNewCommand());
-		
-		//Noch in der Entwicklung:
+
+		// Noch in der Entwicklung:
 		getCommand("konto").setTabCompleter(new TabCompletion());
 		getCommand("konto").setExecutor(new BankCommand());
-		
-		
-		
-		//Listener:
+
+		// Listener:
 		Bukkit.getPluginManager().registerEvents(new VersteigerungListener(), this);
 		Bukkit.getPluginManager().registerEvents(new MenuListenerAnimal(), this);
 		Bukkit.getPluginManager().registerEvents(new LiftSignListener(), this);
@@ -189,134 +191,143 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new VersteigerungListener(), this);
 		Bukkit.getPluginManager().registerEvents(new EventJoinListener(), this);
 		Bukkit.getPluginManager().registerEvents(new VanishListener(), this);
-		Bukkit.getPluginManager().registerEvents(new MenuListenerCommands(),this);
-		Bukkit.getPluginManager().registerEvents(new HalloweenListener(),this);
-		Bukkit.getPluginManager().registerEvents(new ScStaatListener(),this);
+		Bukkit.getPluginManager().registerEvents(new MenuListenerCommands(), this);
+		Bukkit.getPluginManager().registerEvents(new HalloweenListener(), this);
+		Bukkit.getPluginManager().registerEvents(new ScStaatListener(), this);
 		Bukkit.getPluginManager().registerEvents(new ResetConfig(), this);
 		Bukkit.getPluginManager().registerEvents(new votifierListener(), this);
 		Bukkit.getPluginManager().registerEvents(new BasicListener(), this);
 		Bukkit.getPluginManager().registerEvents(new MenuListener(), this);
-		Bukkit.getPluginManager().registerEvents(new MenuListenerToken(),this);
-		Bukkit.getPluginManager().registerEvents(new LiftSignListener(),this);
+		Bukkit.getPluginManager().registerEvents(new MenuListenerToken(), this);
+		Bukkit.getPluginManager().registerEvents(new LiftSignListener(), this);
 		
-		//Entwicklung:
+		Bukkit.getPluginManager().registerEvents(new HostileMobSpawn(), this);
+
+		// Entwicklung:
 		Bukkit.getPluginManager().registerEvents(new MobLevelListener(), this);
-		Bukkit.getPluginManager().registerEvents(new BankListener(),this);
+		Bukkit.getPluginManager().registerEvents(new BankListener(), this);
 
-
-		//Unten: Messenger-Start
-		MessengerCommand m1=new MessengerCommand();
+		// Unten: Messenger-Start
+		MessengerCommand m1 = new MessengerCommand();
 		m1.start();
-		
-		//Unten: Vote-Auswertungs-Timer
+
+		// Unten: Vote-Auswertungs-Timer
 		Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
 			@Override
 			public void run() {
-			
+
 				LocalDate localDate = LocalDate.now();
 
-				 Calendar cal = Calendar.getInstance();
-			        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
-				
-				String f=sdf.format(cal.getTime());
-				if(votifierListener.Config.get("Uhr."+f.substring(0, 5))==null) {
-					
-				if(f.substring(3, 5).equals("15")  ) {
-					try {
-						votifierListener.dod();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					votifierListener.Config.set("Uhr."+f.substring(0, 5), 1);
-					try {
-						votifierListener.save();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}}
-				if(votifierListener.Config.get("Uhr."+f.substring(0, 5))==null) {
-					
-					if(f.substring(3, 5).equals("45")  ) {
+				String f = sdf.format(cal.getTime());
+				if (votifierListener.Config.get("Uhr." + f.substring(0, 5)) == null) {
+
+					if (f.substring(3, 5).equals("15")) {
 						try {
 							votifierListener.dod();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						
-						votifierListener.Config.set("Uhr."+f.substring(0, 5), 1);
+						votifierListener.Config.set("Uhr." + f.substring(0, 5), 1);
 						try {
 							votifierListener.save();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}}
+					}
+				}
+				if (votifierListener.Config.get("Uhr." + f.substring(0, 5)) == null) {
+
+					if (f.substring(3, 5).equals("45")) {
+						try {
+							votifierListener.dod();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+
+						votifierListener.Config.set("Uhr." + f.substring(0, 5), 1);
+						try {
+							votifierListener.save();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 		}, 200, 200);
 		Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
 			@Override
 			public void run() {
-			
+
 				LocalDate localDate = LocalDate.now();
 
-				 Calendar cal = Calendar.getInstance();
-			        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
-				
-				String f=sdf.format(cal.getTime());
-				if(votifierListener.Config.get("Checked.b."+f.substring(0, 5))==null) {
-				if(f.substring(3, 5).equals("05")  ) {
-					try {
-						votifierListener.ded();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					votifierListener.Config.set("Checked.b."+f.substring(0, 5), 1);
-					try {
-						votifierListener.save();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}}
-			
-				if(votifierListener.Config.get("Checked.b."+f.substring(0, 5))==null) {
-					if(f.substring(3, 5).equals("35")  ) {
+				String f = sdf.format(cal.getTime());
+				if (votifierListener.Config.get("Checked.b." + f.substring(0, 5)) == null) {
+					if (f.substring(3, 5).equals("05")) {
 						try {
 							votifierListener.ded();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						votifierListener.Config.set("Checked.b."+f.substring(0, 5), 1);
+						votifierListener.Config.set("Checked.b." + f.substring(0, 5), 1);
 						try {
 							votifierListener.save();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}}
+					}
+				}
+
+				if (votifierListener.Config.get("Checked.b." + f.substring(0, 5)) == null) {
+					if (f.substring(3, 5).equals("35")) {
+						try {
+							votifierListener.ded();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						votifierListener.Config.set("Checked.b." + f.substring(0, 5), 1);
+						try {
+							votifierListener.save();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 		}, 200, 200);
-		
-	
-		
+
 	}
-			
-			
-		
-		
 
-	
-
-	
 	public static Main getPlugin() {
 		return plugin;
 	}
-	
+
+	public void onLoad() {
+		FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
+		try {
+			// register our flag with the registry
+			registry.register(Flags.HostileMobSpawn);
+			registry.register(Flags.CONSOLE_COMMAND_ON_ENTRY);
+			registry.register(Flags.CONSOLE_COMMAND_ON_EXIT);
+			getLogger().log(Level.INFO, "Loaded all Flags");
+		} catch (FlagConflictException e) {
+			// some other plugin registered a flag by the same name already.
+			// you may want to re-register with a different name, but this
+			// could cause issues with saved flags in region files. it's better
+			// to print a message to let the server admin know of the conflict
+		}
+	}
 }
