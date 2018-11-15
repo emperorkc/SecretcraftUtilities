@@ -34,8 +34,8 @@ import de.secretcraft.bank.commands.BankCommand;
 import de.secretcraft.bank.config.BankConfig;
 import de.secretcraft.bank.listener.BankListener;
 import de.secretcraft.basiclisteners.BasicListener;
-import de.secretcraft.customFlags.Listeners.HostileMobSpawn;
-import de.secretcraft.customFlags.flags.Flags;
+//import de.secretcraft.customFlags.Listeners.HostileMobSpawn;
+//import de.secretcraft.customFlags.flags.Flags;
 import de.secretcraft.eventplaner.Commands.ChestCommands;
 import de.secretcraft.eventplaner.Commands.EventJoinCommand;
 import de.secretcraft.eventplaner.Commands.JMCommand;
@@ -201,7 +201,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new MenuListenerToken(), this);
 		Bukkit.getPluginManager().registerEvents(new LiftSignListener(), this);
 
-		Bukkit.getPluginManager().registerEvents(new HostileMobSpawn(), this);
+		//Bukkit.getPluginManager().registerEvents(new HostileMobSpawn(), this);
 
 		// Entwicklung:
 		Bukkit.getPluginManager().registerEvents(new MobLevelListener(), this);
@@ -316,7 +316,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onLoad() {
-		FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
+		/*FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
 		try {
 			// register our flag with the registry
 			registry.register(Flags.HostileMobSpawn);
@@ -328,6 +328,6 @@ public class Main extends JavaPlugin {
 			// you may want to re-register with a different name, but this
 			// could cause issues with saved flags in region files. it's better
 			// to print a message to let the server admin know of the conflict
-		}
+		}*/
 	}
 }

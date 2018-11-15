@@ -48,6 +48,8 @@ commands:
     description: d
   nein: 
     description: nein
+  punkte:
+    description: punkte
   regeln: 
     description: regeln
   removereward: 
@@ -117,6 +119,7 @@ permissions:
       scu.gsdef: true
       scu.gsdel: true
       scu.gsinfo: true
+      scu.pointadmin: true
       scu.serie: true
       scu.setstreak: true
       scu.ticket: true
@@ -177,6 +180,8 @@ permissions:
     description: gsdel
   scu.gsinfo: 
     description: gsinfo
+  scu.pointadmin:
+    description: pointadmin
   scu.serie: 
     description: serie
   scu.setstreak: 
