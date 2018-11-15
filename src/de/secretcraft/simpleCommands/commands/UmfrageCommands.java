@@ -3,10 +3,7 @@ package de.secretcraft.simpleCommands.commands;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Iterator;
-
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,9 +16,6 @@ import de.secretcraft.main.Main;
 import de.secretcraft.main.Output;
 import de.secretcraft.main.UtilitiesConfig;
 import de.secretcraft.extern.mkremins.fanciful.FancyMessage;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.TextComponent;
 
 public class UmfrageCommands implements CommandExecutor {
 

@@ -1,26 +1,19 @@
 package de.secretcraft.flagBuy.commands;
 
 import java.io.IOException;
-import static com.sk89q.worldguard.bukkit.BukkitUtil.*;
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.util.Vector;
-
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.WorldGuard;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;

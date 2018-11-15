@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import de.secretcraft.main.Output;
 import de.secretcraft.token.commands.MenuListenerToken;
-import de.secretcraft.token.config.PlayerTokenData;
 
 public class TeamCommand implements CommandExecutor {
 public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {

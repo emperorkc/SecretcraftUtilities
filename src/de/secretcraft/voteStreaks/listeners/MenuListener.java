@@ -27,7 +27,7 @@ import de.secretcraft.voteStreaks.commands.addRewardCommand;
 import de.secretcraft.voteStreaks.commands.votedToday;
 
 public class MenuListener implements Listener {
-	
+
 	private String name;
 	private int size;
 	private onClick click;
@@ -90,9 +90,9 @@ public class MenuListener implements Listener {
 			ItemStack item = event.getCurrentItem();
 			int day = 0;
 			for (int i = 1; i <= votedToday.getStreak(p); i++) {
-				if (VotedPlayers.getRewardAttach( i) != null) {
+				if (VotedPlayers.getRewardAttach(i) != null) {
 					if (VotedPlayers.getRewardAttach(i).equals(item.getItemMeta().getDisplayName())) {
-					
+
 						day = i;
 					}
 				}
@@ -102,21 +102,22 @@ public class MenuListener implements Listener {
 				if (!votedToday.isPickedUp(p, day)) {
 					ItemStack itemi = null;
 					if (!VotedPlayers.getRewardID(p, day).equals("LEGACY_SKULL_ITEM")) {
-						
-						if(!VotedPlayers.getRewardName(p, day).equals("Kleine Belohnung")) {
+
+						if (!VotedPlayers.getRewardName(p, day).equals("Kleine Belohnung")) {
 							itemi = addRewardCommand.getItem(VotedPlayers.getRewardName(p, day),
 									VotedPlayers.getRewardID(p, day), day, p, VotedPlayers.getRewardAmount(p, day));
-						ItemMeta g = itemi.getItemMeta();
-						g.setDisplayName(null);
-						g.setLore(null);
-						itemi.setItemMeta(g);
+							ItemMeta g = itemi.getItemMeta();
+							g.setDisplayName(null);
+							g.setLore(null);
+							itemi.setItemMeta(g);
 						} else {
 							String id = VotedPlayers.getRewardID(p, day);
 							itemi = new ItemStack(Material.getMaterial(id));
 							itemi.setAmount(VotedPlayers.getRewardAmount(p, day));
 							ItemMeta isMeta = itemi.getItemMeta();
-							de.secretcraft.voteStreaks.commands.List<String> l1 = (VotedPlayers.getEnchants( day));
-							de.secretcraft.voteStreaks.commands.List<Integer> l2 = VotedPlayers.getEnchantmentLevel(p, day);
+							de.secretcraft.voteStreaks.commands.List<String> l1 = (VotedPlayers.getEnchants(day));
+							de.secretcraft.voteStreaks.commands.List<Integer> l2 = VotedPlayers.getEnchantmentLevel(p,
+									day);
 							l1.toFirst();
 							l2.toFirst();
 							while (l1.hasAccess()) {
@@ -124,52 +125,45 @@ public class MenuListener implements Listener {
 								int f = l2.getObject();
 								l1.next();
 								l2.next();
-								
+
 								isMeta.addEnchant(Enchantment.getByName(e), f, true);
 
 							}
-							
+
 							itemi.setItemMeta(isMeta);
 						}
-						
+
 					} else {
 						itemi = addRewardCommand.giveItemHead(p, p.getName(), day);
-						
+
 					}
 					if (!invFull(p)) {
 						p.getInventory().addItem(itemi);
 						votedToday.pickUp(p, day);
-						p.sendMessage(prefix+" §2Du hast deine Belohnung abgeholt.");
-						p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP
-								, 100, 1);
-					
+						p.sendMessage(prefix + " §2Du hast deine Belohnung abgeholt.");
+						p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 100, 1);
+
 					} else {
-						p.sendMessage(prefix+" §cDein Inventar ist voll.");
-						p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT
-								, 100, 1);
+						p.sendMessage(prefix + " §cDein Inventar ist voll.");
+						p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT, 100, 1);
 					}
 				} else {
-					p.sendMessage(prefix+" §cDu hast diese Belohnung bereits abgeholt.");
-					p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT
-							, 100, 1);
+					p.sendMessage(prefix + " §cDu hast diese Belohnung bereits abgeholt.");
+					p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT, 100, 1);
 				}
-			} else if(item.getType()==Material.PAPER) {
-				if(!votedToday.isPickedUp(p, day)) {
-					Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-							"say hallo");
+			} else if (item.getType() == Material.PAPER) {
+				if (!votedToday.isPickedUp(p, day)) {
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "say hallo");
 					votedToday.pickUp(p, day);
 				} else {
-					p.sendMessage(prefix+" §cDu hast diese Belohnung bereits abgeholt.");
-					p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT
-							, 100, 1);
+					p.sendMessage(prefix + " §cDu hast diese Belohnung bereits abgeholt.");
+					p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT, 100, 1);
 				}
 			} else {
-				p.sendMessage(prefix+" §cDu hast diese Belohnung noch nicht freigeschaltet!");
-				p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT
-						, 100, 1);
+				p.sendMessage(prefix + " §cDu hast diese Belohnung noch nicht freigeschaltet!");
+				p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT, 100, 1);
 			}
 
-			
 		}
 	}
 

@@ -7,7 +7,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
+
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -16,7 +16,7 @@ import com.Acrobot.ChestShop.Events.PreTransactionEvent.TransactionOutcome;
 import com.Acrobot.ChestShop.Events.TransactionEvent;
 import com.Acrobot.ChestShop.Events.TransactionEvent.TransactionType;
 
-import de.secretcraft.bank.config.BankConfig;
+
 import de.secretcraft.bank.config.BankData;
 import de.secretcraft.main.UtilitiesConfig;
 import net.milkbowl.vault.economy.Economy;

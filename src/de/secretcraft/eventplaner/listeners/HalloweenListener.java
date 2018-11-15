@@ -3,7 +3,6 @@ package de.secretcraft.eventplaner.listeners;
 import java.io.File;
 import java.io.IOException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,16 +14,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import com.sk89q.worldedit.IncompleteRegionException;
-import com.sk89q.worldedit.LocalSession;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldedit.bukkit.BukkitPlayer;
-import com.sk89q.worldedit.bukkit.WorldEditListener;
 
 import de.secretcraft.main.UtilitiesConfig;
 import de.secretcraft.voteStreaks.commands.List;

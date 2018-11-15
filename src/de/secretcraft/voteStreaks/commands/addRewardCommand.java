@@ -3,9 +3,7 @@ package de.secretcraft.voteStreaks.commands;
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,8 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.material.MaterialData;
-
 import de.secretcraft.main.UtilitiesConfig;
 
 public class addRewardCommand implements CommandExecutor {

@@ -1,34 +1,32 @@
 package de.secretcraft.voteStreaks.listeners;
 
-
-
 public class Node<ContentType> {
 
-    private ContentType content;
-    Node<ContentType> next;
+	private ContentType content;
+	Node<ContentType> next;
 
-    public Node(ContentType content) {
-        this(content, null);
-    }
+	public Node(ContentType content) {
+		this(content, null);
+	}
 
-    Node(ContentType content, Node<ContentType> next) {
-        this.content = content;
-        this.next = next;
-    }
+	Node(ContentType content, Node<ContentType> next) {
+		this.content = content;
+		this.next = next;
+	}
 
-    Node<ContentType> getNext() {
-        return next;
-    }
+	Node<ContentType> getNext() {
+		return next;
+	}
 
-    public void setNext(Node<ContentType> next) {
-        this.next = next;
-    }
+	public void setNext(Node<ContentType> next) {
+		this.next = next;
+	}
 
-    public ContentType getContent() {
-        return content;
-    }
+	public ContentType getContent() {
+		return content;
+	}
 
-    void setContent(ContentType content) {
-        this.content = content;
-    }
+	void setContent(ContentType content) {
+		this.content = content;
+	}
 }

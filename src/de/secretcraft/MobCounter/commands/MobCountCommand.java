@@ -10,19 +10,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
-import com.sk89q.worldedit.LocalSession;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldguard.LocalPlayer;
+
 import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.extent.Extent;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.secretcraft.main.Output;
@@ -34,7 +26,6 @@ public class MobCountCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
 		Player p = (Player) sender;
-		Plugin worldguard = p.getServer().getPluginManager().getPlugin("WorldGuard");
 		WorldGuard wg = WorldGuard.getInstance();
 		String worldname = p.getWorld().getName();
 		World world = Bukkit.getWorld(worldname);

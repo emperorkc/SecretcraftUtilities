@@ -2,8 +2,6 @@ package de.secretcraft.eventplaner.listeners;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -19,7 +17,6 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import de.secretcraft.main.UtilitiesConfig;
-import de.secretcraft.token.config.PlayerTokenData;
 import de.secretcraft.voteStreaks.commands.List;
 
 public class ItemListener implements Listener {

@@ -9,24 +9,16 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.scheduler.BukkitTask;
-
 
 import de.secretcraft.main.Main;
 import de.secretcraft.main.Output;
