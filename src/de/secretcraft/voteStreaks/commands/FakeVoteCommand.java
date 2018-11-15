@@ -7,13 +7,10 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import com.vexsoftware.votifier.model.Vote;
 
 import de.secretcraft.main.UtilitiesConfig;
 
@@ -21,11 +18,11 @@ public class FakeVoteCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Player k = (Player) sender;
-		
+
 		String prefix = UtilitiesConfig.getPrefix();
 		if (k.hasPermission("scu.fakevote")) {
 			if (args.length > 0) {
-				
+
 				LocalDate localDate = LocalDate.now();
 
 				String date = DateTimeFormatter.ofPattern("MMdd").format(localDate);
@@ -51,37 +48,37 @@ public class FakeVoteCommand implements CommandExecutor {
 					try {
 						votedToday.addVote(p);
 						Bukkit.broadcastMessage("§6§o" + p.getName()
-						+ " §ehat geFAKEvotet und tolle Belohnungen erhalten! Vote auch du mit §6§o/vote§e!");
+								+ " §ehat geFAKEvotet und tolle Belohnungen erhalten! Vote auch du mit §6§o/vote§e!");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
+					try {
+						if (VotedPlayers.getRewardAttach(votedToday.getStreak(p)) != null
+								&& !votedToday.isPickedUp(p, votedToday.getStreak(p))) {
+							p.sendMessage(prefix
+									+ " §eDu hast eine neue Belohnung freigeschaltet. Hole sie dir bei §6§l/serie§e ab.");
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (votedToday.getPlayersCount(p) == 0) {
 						try {
-							if (VotedPlayers.getRewardAttach(votedToday.getStreak(p)) != null
-									&& !votedToday.isPickedUp(p, votedToday.getStreak(p))) {
-								p.sendMessage(prefix
-										+ " §eDu hast eine neue Belohnung freigeschaltet. Hole sie dir bei §6§l/serie§e ab.");
-							}
+							votedToday.doThis(p);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						if(votedToday.getPlayersCount(p)==0) {
-							try {
-								votedToday.doThis(p);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						} else {
-							try {
-								votedToday.addVotesCount(p);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						
+					} else {
+						try {
+							votedToday.addVotesCount(p);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
 					}
 				} else {
 					List<String> l3 = votedToday.getPlayers();
@@ -102,7 +99,7 @@ public class FakeVoteCommand implements CommandExecutor {
 								player1 = allplayers[i].getName();
 							}
 						}
-						
+
 						if (player1 != null) {
 
 							if (player1.toLowerCase().equals(args[0].toLowerCase())) {
@@ -114,19 +111,19 @@ public class FakeVoteCommand implements CommandExecutor {
 						l3.next();
 					}
 					if (tz = true) {
-						if(p==null) {
-						p1 = Bukkit.getServer().getOfflinePlayer(id);
+						if (p == null) {
+							p1 = Bukkit.getServer().getOfflinePlayer(id);
 						}
 						int i = votedToday.getDay(p1) + 1;
 						try {
 							votedToday.addVote(p1);
 							Bukkit.broadcastMessage("§6§o" + p1.getName()
-							+ " §ehat geFAKEvotet und tolle Belohnungen erhalten! Vote auch du mit §6§o/vote§e!");
+									+ " §ehat geFAKEvotet und tolle Belohnungen erhalten! Vote auch du mit §6§o/vote§e!");
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						if(votedToday.getPlayersCount(p1)==0) {
+						if (votedToday.getPlayersCount(p1) == 0) {
 							try {
 								votedToday.doThis(p1);
 							} catch (IOException e) {

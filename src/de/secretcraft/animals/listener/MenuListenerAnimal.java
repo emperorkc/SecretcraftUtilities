@@ -10,8 +10,6 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -22,33 +20,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
+
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.scheduler.BukkitTask;
 
 import de.secretcraft.main.Main;
 import de.secretcraft.main.UtilitiesConfig;
-import de.secretcraft.simpleCommands.commands.TeamCommand;
-import de.secretcraft.token.config.PlayerTokenData;
-import de.secretcraft.voteStreaks.commands.OpenInventoryCommand;
-import de.secretcraft.voteStreaks.commands.VotedPlayers;
-import de.secretcraft.voteStreaks.commands.addRewardCommand;
-import de.secretcraft.voteStreaks.commands.votedToday;
-import me.lucko.luckperms.api.LuckPermsApi;
-import me.lucko.luckperms.api.Node;
-import me.lucko.luckperms.api.User;
-import me.lucko.luckperms.api.event.LuckPermsEvent;
-import me.lucko.luckperms.api.event.track.TrackCreateEvent;
-import me.lucko.luckperms.api.event.user.track.UserPromoteEvent;
-import me.lucko.luckperms.api.event.user.track.UserTrackEvent;
 
 public class MenuListenerAnimal implements Listener {
 	Plugin plugin = Main.getPlugin();
