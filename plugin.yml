@@ -1,21 +1,21 @@
 --- 
 commands: 
-  eventjoin:
-    description: "eventjoin"
   addreward: 
     description: "adds reward"
+  animals: 
+    description: "tiere halt"
   availableflags: 
     description: avaibleflags
   convertuuid: 
     description: ll
   discord: 
     description: discord
+  eventjoin: 
+    description: eventjoin
   eventmsg: 
     description: event
   fakevote: 
     description: "fakes vote"
-  spawners:
-    description: "spawners"
   flag: 
     description: flag
   flags: 
@@ -24,6 +24,8 @@ commands:
     description: forum
   gs: 
     description: "gs hinzufuegen"
+  h: 
+    description: d
   hc: 
     description: ss
   hcadd: 
@@ -32,23 +34,23 @@ commands:
     description: dels
   help: 
     description: help
+  hreset: 
+    description: fds
+  htop: 
+    description: fds
   ja: 
     description: ja
+  jm: 
+    description: d
   konto: 
     description: konto
-  hreset:
-    description: fds
-  htop:
-    description: fds
-  h:
-    description: d
   messenger: 
     description: restart
-  jm:
-    description: d
   nein: 
     description: nein
-  punkte:
+  preset: 
+    description: v
+  punkte: 
     description: punkte
   regeln: 
     description: regeln
@@ -58,14 +60,16 @@ commands:
     description: ~
   serie: 
     description: f
+  server: 
+    description: server
   setstreak: 
     description: h
+  spawners: 
+    description: spawners
   team: 
     description: team
-  animals: 
-    description: "tiere halt"
-  tiere:
-    description: "Tiere"
+  tiere: 
+    description: Tiere
   token: 
     description: token
   tutorial: 
@@ -74,8 +78,6 @@ commands:
     description: twitch
   umfrage: 
     description: umfrage
-  preset: 
-    description: v
   vip: 
     description: l
   vote: 
@@ -88,8 +90,6 @@ commands:
     description: kaufen
   youtube: 
     description: youtube
-  server:
-    description: server
 main: de.secretcraft.main.Main
 name: SecretcraftUtilities
 permissions: 
@@ -180,7 +180,7 @@ permissions:
     description: gsdel
   scu.gsinfo: 
     description: gsinfo
-  scu.pointadmin:
+  scu.pointadmin: 
     description: pointadmin
   scu.serie: 
     description: serie

@@ -58,7 +58,7 @@ public class PlayerEventPointsCommands implements CommandExecutor {
 				
 				case "add":
 				
-					if (p.hasPermission("scu.pointsadmin")) {
+					if (p.hasPermission("scu.pointadmin")) {
 						if (arg3.length > 2) {
 
 							if (Bukkit.getOfflinePlayer(arg3[1]) != null) {
