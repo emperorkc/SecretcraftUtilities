@@ -119,6 +119,13 @@ public class MenuListenerCommands implements Listener {
 						VoteCommand.closeInv(p);
 					}
 			}
+			
+			if (event.getInventory().getTitle()
+					.equals("§6§lTeam-Mitglieder")) {
+					if(meta.getDisplayName().equals("§c§lVerlassen")) {
+						TeamCommand.closeInv(p);
+					}
+			}
 				
 			
 		}

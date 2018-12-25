@@ -116,7 +116,7 @@ public class votedToday {
 								Config.set("Spieler." + p.getUniqueId() + ".Streak", 1);
 							}
 						}
-					} else if (Month == 3 || Month==12) {
+					} else if (Month == 3 || Month == 12) {
 						if (Config.getInt("Spieler." + p.getUniqueId() + ".Monat") == Month - 1
 								&& (Config.getInt("Spieler." + p.getUniqueId() + ".Tag") == 28
 										|| Config.getInt("Spieler." + p.getUniqueId() + ".Tag") == 29)) {

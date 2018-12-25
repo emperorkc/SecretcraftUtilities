@@ -66,6 +66,7 @@ import de.secretcraft.voteStreaks.commands.setStreakCommand;
 import de.secretcraft.voteStreaks.listeners.MenuListener;
 import de.secretcraft.voteStreaks.listeners.VersteigerungListener;
 import de.secretcraft.voteStreaks.listeners.votifierListener;
+import de.secretcraft.voteStreaks.commands.WerbungCommand;
 
 public class Main extends JavaPlugin {
 	private static Main plugin;
@@ -153,6 +154,7 @@ public class Main extends JavaPlugin {
 		getCommand("scureload").setExecutor(new ReparaturCommand());
 		getCommand("twitch").setExecutor(new TwitchCommand());
 		getCommand("tiere").setExecutor(new TiereNewCommand());
+		getCommand("werbung").setExecutor(new WerbungCommand());
 
 		// Noch in der Entwicklung:
 		getCommand("konto").setTabCompleter(new TabCompletion());

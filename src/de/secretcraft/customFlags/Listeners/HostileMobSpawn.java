@@ -94,6 +94,8 @@ public class HostileMobSpawn implements Listener {
 		case WITHER:
 		case STRAY:
 		case ZOMBIE_VILLAGER:
+		case DROWNED:
+		case PHANTOM:
 			return true;
 		default:
 			return false;

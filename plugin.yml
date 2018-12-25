@@ -198,3 +198,4 @@ permissions:
   secretcraft.messenger.restart: 
     description: e
 version: "1.6.10"
+depend: [WorldGuard]
