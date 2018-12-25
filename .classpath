@@ -2,14 +2,14 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/kevin/Desktop/Minecraft Worksstaion/Plugin Workstation/SecrecraftUtilities/Jaars/ChestShop.jar"/>
-	<classpathentry kind="lib" path="C:/Users/kevin/Desktop/Minecraft Worksstaion/Plugin Workstation/SecrecraftUtilities/Jaars/craftconomy3-3.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/kevin/Desktop/Minecraft Worksstaion/Plugin Workstation/SecrecraftUtilities/Jaars/LuckPerms-Bukkit-4.2.54.jar"/>
-	<classpathentry kind="lib" path="C:/Users/kevin/Desktop/Minecraft Worksstaion/Plugin Workstation/SecrecraftUtilities/Jaars/nuvotifier-universal-2.3.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/kevin/Desktop/Minecraft Worksstaion/Plugin Workstation/SecrecraftUtilities/Jaars/Paper-latest.jar"/>
-	<classpathentry kind="lib" path="C:/Users/kevin/Desktop/Minecraft Worksstaion/Plugin Workstation/SecrecraftUtilities/Jaars/TitleAPI_v2.1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/kevin/Desktop/Minecraft Worksstaion/Plugin Workstation/SecrecraftUtilities/Jaars/Vault.jar"/>
-	<classpathentry kind="lib" path="C:/Users/kevin/Desktop/Minecraft Worksstaion/Plugin Workstation/SecrecraftUtilities/Jaars/worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar"/>
-	<classpathentry kind="lib" path="C:/Users/kevin/Desktop/Minecraft Worksstaion/Plugin Workstation/SecrecraftUtilities/Jaars/worldguard-legacy-7.0.0-SNAPSHOT-dist.jar"/>
+	<classpathentry kind="lib" path="C:/Users/denni/Jars/ChestShop.jar"/>
+	<classpathentry kind="lib" path="C:/Users/denni/Jars/craftconomy3-3.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/denni/Jars/LuckPerms-Bukkit-4.2.54.jar"/>
+	<classpathentry kind="lib" path="C:/Users/denni/Jars/nuvotifier-universal-2.3.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/denni/Jars/Paper-latest.jar"/>
+	<classpathentry kind="lib" path="C:/Users/denni/Jars/TitleAPI_v2.1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/denni/Jars/Vault.jar"/>
+	<classpathentry kind="lib" path="C:/Users/denni/Jars/worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar"/>
+	<classpathentry kind="lib" path="C:/Users/denni/Jars/worldguard-legacy-7.0.0-SNAPSHOT-dist.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
